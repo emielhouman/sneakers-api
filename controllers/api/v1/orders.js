@@ -5,12 +5,12 @@ const create = (req, res) => {
     const size = req.body.order.size;
     const color = req.body.order.color;
 
-    const o = new Order({ name: name, size: size, color: color });
-    o.save().then(() => {
+    const order = new Order({ name: name, size: size, color: color });
+    order.save().then(() => {
         res.json({
             status: "success",
             data: {
-                order: o,
+                order: order,
             },
         });
     });
