@@ -4,4 +4,4 @@ const User = mongoose.model("User", {
     password: String,
 });
 
-module.exports = User;
+module.exports = mongoose.model('User', userSchema);
