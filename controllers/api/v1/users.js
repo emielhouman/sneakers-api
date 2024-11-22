@@ -30,7 +30,23 @@ const index = async (req, res) => {
     }
 };
 
+// function to login a user
+const login = async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await User.findOne({ username, password });
+        if (user) {
+            res.json({ success: true, message: 'Login successful' });
+        } else {
+            res.status(401).json({ success: false, message: 'Invalid credentials' });
+        }
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Internal server error', error: error.message });
+    }
+};
+
 module.exports = {
     create, 
     index,
+    login,
 };
