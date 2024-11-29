@@ -1,5 +1,6 @@
 const Order = require("../../../models/api/v1/Order");
 
+// function to create a new order
 const create = (req, res) => {
     const name = req.body.order.name;
     const size = req.body.order.size;
