@@ -37,11 +37,32 @@ const index = async (req, res) => {
             },
         });
     } catch (error) {
-        res.status(500).json({ status: "error", message: "Internal server error", error: error.message });
+        res.status(500).json({ status: "error", message: "Internal server error:", error: error.message });
+    }
+};
+
+// function to get a single order with id
+const show = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const order = await Order.findById(id);
+        if (!order) {
+            return res.status(404).json({ status: "error", message: "Order not found" });
+        } else {
+            res.json({
+                status: "success",
+                data: {
+                    order: order,
+                },
+            });
+        }
+    } catch (error) {
+        res.status(500).json({ status: "error", message: "Internal server error:", error: error.message });
     }
 };
 
 module.exports = {
     create,
     index,
+    show,
 };
