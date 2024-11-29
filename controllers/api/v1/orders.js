@@ -5,8 +5,17 @@ const create = (req, res) => {
     const name = req.body.order.name;
     const size = req.body.order.size;
     const color = req.body.order.color;
+    const texture = req.body.order.texture;
+    const image = req.body.order.image;
 
-    const order = new Order({ name: name, size: size, color: color });
+    const order = new Order({ 
+        name: name,
+        size: size, 
+        color: color,
+        texture: texture,
+        image: image
+    });
+    
     order.save().then(() => {
         res.json({
             status: "success",
