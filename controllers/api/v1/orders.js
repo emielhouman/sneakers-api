@@ -2,18 +2,38 @@ const Order = require("../../../models/api/v1/Order");
 
 // function to create a new order
 const create = (req, res) => {
-    const name = req.body.order.name;
+    const sneaker = req.body.order.sneaker;
     const size = req.body.order.size;
-    const color = req.body.order.color;
-    const texture = req.body.order.texture;
+    const price = req.body.order.price;
+    const amount = req.body.order.amount;
     const image = req.body.order.image;
+    const colors = req.body.order.colors;
+    const textures = req.body.order.textures;
 
+    const firstname = req.body.order.firstname;
+    const lastname = req.body.order.lastname;
+    const email = req.body.order.email;
+    const telephone = req.body.order.tel;
+    const address = req.body.order.address;
+
+    const status = req.body.order.status;
+    
     const order = new Order({ 
-        name: name,
-        size: size, 
-        color: color,
-        texture: texture,
-        image: image
+        sneaker: sneaker,
+        size: size,
+        price: price,
+        amount: amount,
+        image: image, 
+        colors: colors,
+        textures: textures,
+
+        firstname: firstname,
+        lastname: lastname,
+        telephone: telephone,
+        email: email,
+        address: address,
+
+        status: status,
     });
     
     order.save().then(() => {
