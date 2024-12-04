@@ -7,8 +7,7 @@ const create = (req, res) => {
     const price = req.body.order.price;
     const amount = req.body.order.amount;
     const image = req.body.order.image;
-    const colors = req.body.order.colors;
-    const textures = req.body.order.textures;
+    const sneakerConfigs = req.body.order.sneakerConfigs;
 
     const firstname = req.body.order.firstname;
     const lastname = req.body.order.lastname;
@@ -24,8 +23,7 @@ const create = (req, res) => {
         price: price,
         amount: amount,
         image: image, 
-        colors: colors,
-        textures: textures,
+        sneakerConfigs: sneakerConfigs,
 
         firstname: firstname,
         lastname: lastname,
