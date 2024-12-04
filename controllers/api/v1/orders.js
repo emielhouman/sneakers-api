@@ -41,7 +41,7 @@ const create = (req, res) => {
 };
 
 // function to get all the orders
-const index = async (res) => {
+const index = async (req, res) => {
     try {
         const orders = await Order.find({});
         res.json({
