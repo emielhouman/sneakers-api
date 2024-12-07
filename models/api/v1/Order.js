@@ -12,6 +12,7 @@ const Order = mongoose.model("Order", {
     telephone: String,
     address: Array,
     payment: Array,
+    date: { type: Date, default: Date.now }, 
     status: String,
 });
 

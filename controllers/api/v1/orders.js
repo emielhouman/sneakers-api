@@ -29,6 +29,7 @@ const create = (req, res) => {
         email: email,
         address: address,
         payment: payment,
+        date: new Date(),
         status: status,
     });
     
