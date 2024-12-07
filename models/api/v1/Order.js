@@ -11,6 +11,7 @@ const Order = mongoose.model("Order", {
     email: String,
     telephone: String,
     address: Array,
+    payment: Array,
     status: String,
 });
 

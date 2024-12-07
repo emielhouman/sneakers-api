@@ -13,6 +13,7 @@ const create = (req, res) => {
     const email = req.body.order.email;
     const telephone = req.body.order.tel;
     const address = req.body.order.address;
+    const payment = req.body.order.payment;
     const status = req.body.order.status;
     
     const order = new Order({ 
@@ -27,6 +28,7 @@ const create = (req, res) => {
         telephone: telephone,
         email: email,
         address: address,
+        payment: payment,
         status: status,
     });
     
