@@ -76,10 +76,17 @@ const show = async (req, res) => {
 };
 
 // function to update a single order with id
-const update = async (req, res) => {
+const updateStatus = async (req, res) => {
     try {
         const { id } = req.params;
-        const order = await Order.findByIdAndUpdate(id);
+        const { status } = req.body.order.status;
+
+        if (!status) {
+            return res.status(400).json({ status: "error", message: "Status is required" });
+        }
+
+        const order = await Order.findByIdAndUpdate(id, {status: status}, { new: true });
+
         if (!order) {
             return res.status(404).json({ status: "error", message: "Order not found" });
         } else {
@@ -121,6 +128,6 @@ module.exports = {
     create,
     index,
     show,
-    update,
+    updateStatus,
     destroy
 };
