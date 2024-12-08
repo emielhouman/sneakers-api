@@ -82,21 +82,21 @@ const show = async (req, res) => {
 const updateStatus = async (req, res) => {
     try {
         const { id } = req.params;
-        const { status } = req.body.order.status;
+        const { order } = req.body;
 
-        if (!status) {
+        if (!order || !order.status) {
             return res.status(400).json({ status: "error", message: "Status is required" });
         }
 
-        const order = await Order.findByIdAndUpdate(id, {status: status}, { new: true });
+        const updatedOrder = await Order.findByIdAndUpdate(id, {status: order.status}, { new: true });
 
-        if (!order) {
+        if (!updatedOrder) {
             return res.status(404).json({ status: "error", message: "Order not found" });
         } else {
             res.json({
                 status: "success",
                 data: {
-                    order: order,
+                    order: updatedOrder,
                 },
             });
         }
@@ -105,7 +105,6 @@ const updateStatus = async (req, res) => {
         res.status(500).json({ status: "error", message: "Internal server error:", error: error.message });
     }
 };
-
 
 // function to delete a single order with id
 const destroy = async (req, res) => {
