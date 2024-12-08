@@ -17,7 +17,7 @@ const create = (req, res) => {
     const status = req.body.order.status;
 
     const date = new Date();
-    date.setHours(date.getHours() + 1);
+    date.setHours(date.getHours() + 1).toJSON();
     
     const order = new Order({ 
         sneaker: sneaker,
