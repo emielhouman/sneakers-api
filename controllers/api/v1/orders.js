@@ -15,6 +15,9 @@ const create = (req, res) => {
     const address = req.body.order.address;
     const payment = req.body.order.payment;
     const status = req.body.order.status;
+
+    const date = new Date();
+    date.setHours(date.getHours() + 1);
     
     const order = new Order({ 
         sneaker: sneaker,
@@ -29,7 +32,7 @@ const create = (req, res) => {
         email: email,
         address: address,
         payment: payment,
-        date: new Date(),
+        date: date,
         status: status,
     });
     
@@ -87,7 +90,6 @@ const updateStatus = async (req, res) => {
         if (!order || !order.status) {
             return res.status(400).json({ status: "error", message: "Status is required" });
         }
-
         const updatedOrder = await Order.findByIdAndUpdate(id, {status: order.status}, { new: true });
 
         if (!updatedOrder) {
