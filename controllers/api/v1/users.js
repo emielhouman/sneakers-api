@@ -70,8 +70,38 @@ const login = async (req, res) => {
     }
 };
 
+// Function to change the password of a user that is logged in (we get the email out of the token)
+const updatePassword = async (req, res) => {
+    const email = req.body.user.email;
+    const newPassword = req.body.user.newPassword;
+
+    try {
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            res.status(401).json({ status: "error", message: "Invalid email or password" });
+        }
+
+        bcrypt.hash(newPassword, 10, (err, hashedPassword) => {
+            if (err) {
+                res.status(500).json({ status: "error", message: "Internal server error", error: err.message });
+            }
+
+            user.password = hashedPassword;
+            user.save().then(() => {
+                res.json({
+                    status: "success",
+                    message: "The password is changed with success",
+                });
+            });
+        });
+    } catch (error) {
+        res.status(500).json({ status: "error", message: "Internal server error", error: error.message });
+    }
+};
+
 module.exports = {
     create, 
     index,
     login,
+    updatePassword,
 };
